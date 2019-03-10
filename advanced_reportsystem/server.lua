@@ -4,8 +4,6 @@
 --Do NOT change stuff here! If something is wrong, please report it in the original topic. Go to the cfg.lua file to edit stuff.
 
 
-local yes = false
-
 RegisterCommand(command, function(source, args, rawCommand)
 	local args = table.concat(args, " ")
 	TriggerClientEvent("chatMessage", -1, "_________________________________________")
