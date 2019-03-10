@@ -29,7 +29,7 @@ end)
 
 RegisterCommand(list, function(source, args) 
 			local argString = table.concat(args, " ")
-			MySQL.Async.fetchAll("SELECT * FROM advanced_report ORDER BY name DESC LIMIT 10",{}, --10 gives the limit of how many "lines" can get readed. every line above 10 will get readed as nil, So if you add more results you need to update this line!
+			MySQL.Async.fetchAll("SELECT * FROM advanced_report ORDER BY name DESC LIMIT 25",{}, --25 gives the limit of how many "lines" can get readed. every line above 10 will get readed as nil, So if you add more results you need to update this line!
 			function(result)
 			if IsPlayerAceAllowed(source, "report.cmds") then
 			if result[1].args ~= nil then
@@ -55,7 +55,7 @@ RegisterCommand(list, function(source, args)
 			if result[6].args ~= nil then
 				Wait(100)
 				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[6].name ..") - ^2".. result[6].args)
-				TriggerClientEvent("chatMessage", source, "_________________________________________")			--want to add more data here? copy and paste the "Wait" and the "TriggerClientEvent" line, and change the number after "result" to a higher value then the last line (10) 	
+				TriggerClientEvent("chatMessage", source, "_________________________________________")			--want to add more data here? copy and paste the "Wait" and the "TriggerClientEvent" line, and change the number after "result" to a higher value then the last line (25) 	
 			if result[7].args ~= nil then
 				Wait(100)
 				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[7].name ..") - ^2".. result[7].args)
@@ -72,6 +72,80 @@ RegisterCommand(list, function(source, args)
 				Wait(100)
 				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[10].name ..") - ^2".. result[10].args)
 				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[11].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[11].name ..") - ^2".. result[11].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[12].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[12].name ..") - ^2".. result[12].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[13].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[13].name ..") - ^2".. result[13].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[14].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[14].name ..") - ^2".. result[14].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[15].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[15].name ..") - ^2".. result[15].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[16].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[16].name ..") - ^2".. result[16].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[17].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[17].name ..") - ^2".. result[17].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[18].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[18].name ..") - ^2".. result[18].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[19].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[19].name ..") - ^2".. result[19].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[20].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[20].name ..") - ^2".. result[20].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[21].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[21].name ..") - ^2".. result[21].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[22].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[22].name ..") - ^2".. result[22].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[23].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[23].name ..") - ^2".. result[23].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[24].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[24].name ..") - ^2".. result[24].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+			if result[25].args ~= nil then
+				Wait(100)
+				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[25].name ..") - ^2".. result[25].args)
+				TriggerClientEvent("chatMessage", source, "_________________________________________")
+																											end
+																										end
+																									end
+																								end
+																							end
+																						end
+																					end
+																				end
+																			end
+																		end
+																	end
+																end
+															end
+														end
 													end
 												end
 											end
@@ -83,8 +157,9 @@ RegisterCommand(list, function(source, args)
 					end
 				end
 			end
-		end)
+		end
 	end)
+end)
 
 RegisterCommand(delete, function(source, rawCommand)
 	if IsPlayerAceAllowed(source, "report.cmds") then
