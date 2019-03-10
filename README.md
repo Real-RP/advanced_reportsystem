@@ -11,6 +11,7 @@ _____________________________________________________________________________
 
 # how to install
 drag and drop the folder into your resources folder and clear if exists the '-master' from the foldername. 
+than start the resource in your server.cfg with 'start advanced_reportsystem'. At least follow the setup permissions step.
 _____________________________________________________________________________
 
 # setup permissions
