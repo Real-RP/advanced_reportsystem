@@ -6,6 +6,8 @@ description 'Advanced Reporting System'
 
 version '1.0.0'
 
+client_script 'client.lua'
+
 
 server_scripts {
 	'config/cfg.lua',
