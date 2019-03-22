@@ -4,13 +4,39 @@
 --Do NOT change stuff here! If something is wrong, please report it in the original topic. Go to the cfg.lua file to edit stuff.
 
 
+function getIdentity(source)
+	local identifier = GetPlayerIdentifiers(source)[1]
+	local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE identifier = @identifier", {['@identifier'] = identifier})
+	if result[1] ~= nil then
+		local identity = result[1]
+
+		return {
+			identifier = identity['identifier'],
+			name = identity['name'],
+			firstname = identity['firstname'],
+			lastname = identity['lastname'],
+			dateofbirth = identity['dateofbirth'],
+			sex = identity['sex'],
+			height = identity['height'],
+			job = identity['job'],
+			group = identity['group']
+		}
+	else
+		return nil
+	end
+end
+
 RegisterCommand(command, function(source, args, rawCommand)
 	local args = table.concat(args, " ")
-	TriggerClientEvent("chatMessage", -1, "_________________________________________")
-	TriggerClientEvent("chatMessage", -1, announce, {255,0,0}, args)
-	TriggerClientEvent("chatMessage", -1, "_________________________________________")
+	TriggerClientEvent("chatMessage", source, "_________________________________________")
+	TriggerClientEvent("chatMessage", source, announce, {255,0,0},"Your Report: ".. args)
+	TriggerClientEvent("chatMessage", source, "_________________________________________")
     TriggerClientEvent("chatMessage", source, bot, {255,0,0}, send_message.. ""..GetPlayerName(source))
-	
+	local grupos = getIdentity(source)
+	if grupos.group ~= 'user' then
+	TriggerClientEvent("chatMessage", source, "A new report came in! ", {255,0,0}, args)
+	TriggerClientEvent("chatMessage", source, "_________________________________________")
+	end
 
 MySQL.Async.execute("INSERT INTO advanced_report ( name, args) VALUES (@name,@args)", {['@name'] = GetPlayerName(source), ['@args'] = args})
 	if txt then
@@ -25,13 +51,16 @@ MySQL.Async.execute("INSERT INTO advanced_report ( name, args) VALUES (@name,@ar
 	end
 end)
 
-
-
 RegisterCommand(list, function(source, args) 
 			local argString = table.concat(args, " ")
 			MySQL.Async.fetchAll("SELECT * FROM advanced_report ORDER BY name DESC LIMIT 25",{}, --25 gives the limit of how many "lines" can get readed. every line above 10 will get readed as nil, So if you add more results you need to update this line!
 			function(result)
-			if IsPlayerAceAllowed(source, "report.cmds") then
+			local grupos = getIdentity(source)
+			if grupos.group == 'user' then
+			TriggerClientEvent("chatMessage", source, "_________________________________________")
+			TriggerClientEvent("chatMessage", source, "^1You aren't allowed to do that!!!")
+			TriggerClientEvent("chatMessage", source, "_________________________________________")
+			elseif grupos.group ~= 'user' then
 			if result[1].args ~= nil then
 				Wait(100)
 				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[1].name ..") - ^2".. result[1].args)
@@ -132,7 +161,7 @@ RegisterCommand(list, function(source, args)
 				Wait(100)
 				TriggerClientEvent("chatMessage", source, "^3("..announce..""..result[25].name ..") - ^2".. result[25].args)
 				TriggerClientEvent("chatMessage", source, "_________________________________________")
-																											end
+																								end
 																										end
 																									end
 																								end
@@ -162,7 +191,8 @@ RegisterCommand(list, function(source, args)
 end)
 
 RegisterCommand(delete, function(source, rawCommand)
-	if IsPlayerAceAllowed(source, "report.cmds") then
+local grupos = getIdentity(source)
+	if grupos.group ~= 'user' then
 	MySQL.Async.execute("DELETE FROM advanced_report WHERE name = @name", { ['@name'] = GetPlayerName(source)})
 	TriggerClientEvent("chatMessage", source, table_delete)
 	end
@@ -170,7 +200,8 @@ end)
 
 
 RegisterCommand(call, function(source, args, rawCommand)
-    if IsPlayerAceAllowed(source, "report.cmds") then
+local grupos = getIdentity(source)
+    if grupos.group ~= 'user' then
 	local args = table.concat(args, " ")
 TriggerClientEvent("chatMessage", -1, "_________________________________________")
 TriggerClientEvent("chatMessage", -1, " ^1"..bot.." ^3"..hey.. " ^2"..args.." ^3"..support.. " "..ts3)
@@ -179,3 +210,8 @@ TriggerClientEvent("chatMessage", -1, "_________________________________________
 end)
 
 
+
+RegisterServerEvent("currenttime")
+AddEventHandler("currenttime", function(source, currenttime)
+TriggerClientEvent("chatMessage", source, currenttime)
+end)
