@@ -1,5 +1,5 @@
 -- will be implemented soon
-Citizen.CreateThread(function()
+--[[ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 		
@@ -13,4 +13,5 @@ local years, months, days, hours, minutes, seconds = Citizen.InvokeNative(0x50C7
 	currenttime = "time sended: "..hour.." : "..minute.." : "..day.." : "..month.." : "..year.." : "..second
 	TriggerServerEvent("currenttime", currenttime)
 	end
-end)
+end) ]]
+
